@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semilar Mill - Mobile Responsive Industrial Monitoring</title>
+  <title>InduSense Pro - Mobile Industrial Monitoring with Custom Unit QR Links</title>
   
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -38,7 +38,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* HEADER & RESPONSIVE NAV */
     header {
       background-color: rgba(30, 41, 59, 0.98);
       border-bottom: 1px solid var(--border-color);
@@ -63,15 +62,12 @@
     .logo-text h1 { font-size: 16px; font-weight: bold; color: #fff; }
     .logo-text p { font-size: 10px; color: var(--text-muted); }
 
-    /* Desktop Nav */
     .desktop-nav { display: flex; gap: 4px; background: rgba(15, 23, 42, 0.7); padding: 5px; border-radius: 8px; border: 1px solid var(--border-color); }
     .desktop-nav button { background: transparent; border: none; color: var(--text-muted); padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.2s; }
     .desktop-nav button.active { background-color: var(--accent-blue); color: #fff; box-shadow: 0 2px 5px rgba(2, 132, 199, 0.4); }
 
-    /* Mobile Hamburger Button */
     .mobile-menu-btn { display: none; background: transparent; border: 1px solid var(--border-color); padding: 8px; border-radius: 8px; color: #fff; cursor: pointer; }
 
-    /* Mobile Drawer Overlay */
     .mobile-drawer {
       position: fixed;
       inset: 0;
@@ -106,10 +102,9 @@
       gap: 10px;
       cursor: pointer;
     }
-    .mobile-drawer-content button.active { background: var(--accent-blue); border-color: var(--accent-blue); }
 
     .header-right { display: flex; align-items: center; gap: 10px; }
-    .sync-pill { display: none; } /* Hidden on small mobile to save space */
+    .sync-pill { display: none; }
     @media(min-width: 640px) { .sync-pill { display: flex; } }
 
     .dot { width: 8px; height: 8px; border-radius: 50%; background: #64748b; }
@@ -119,7 +114,6 @@
 
     .main-container { max-width: 1200px; margin: 15px auto; padding: 0 10px; display: flex; flex-direction: column; gap: 15px; }
 
-    /* KPI CARDS MOBILE OPTIMIZED */
     .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     @media(min-width: 768px) { .kpi-grid { grid-template-columns: repeat(4, 1fr); } }
 
@@ -158,9 +152,10 @@
     .btn-submit { width: 100%; background: var(--accent-blue); color: #fff; border: none; padding: 11px; border-radius: 8px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
     .unit-item { background: rgba(9, 13, 22, 0.7); border: 1px solid var(--border-color); padding: 10px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 8px; }
-    .unit-actions { display: flex; gap: 6px; align-items: center; }
+    .unit-actions { display: flex; gap: 5px; align-items: center; }
 
-    .btn-qr { background: rgba(0, 224, 255, 0.1); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); padding: 4px 7px; border-radius: 6px; font-size: 10px; cursor: pointer; display: flex; align-items: center; gap: 3px; }
+    .btn-qr { background: rgba(0, 224, 255, 0.1); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); padding: 4px 6px; border-radius: 6px; font-size: 10px; cursor: pointer; display: flex; align-items: center; gap: 3px; }
+    .btn-edit-link { background: rgba(2, 132, 199, 0.1); border: 1px solid var(--accent-blue); color: var(--accent-blue); padding: 4px 6px; border-radius: 6px; font-size: 10px; cursor: pointer; display: flex; align-items: center; gap: 3px; }
 
     .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     table { width: 100%; border-collapse: collapse; text-align: left; font-size: 11px; white-space: nowrap; }
@@ -202,12 +197,11 @@
       <div class="logo-area">
         <div class="logo-icon"><i data-lucide="activity" style="width:20px; height:20px;"></i></div>
         <div class="logo-text">
-          <h1>Semilar Monitoring</h1>
+          <h1>InduSense Pro</h1>
           <p>Mobile Industrial Monitoring</p>
         </div>
       </div>
 
-      <!-- Desktop Nav -->
       <nav class="desktop-nav">
         <button id="nav-checksheet" onclick="switchTab('checksheet')" class="active"><i data-lucide="clipboard-check" style="width:14px; height:14px;"></i> Checksheet</button>
         <button id="nav-rekap" onclick="switchTab('rekap')"><i data-lucide="bar-chart-3" style="width:14px; height:14px;"></i> Riwayat</button>
@@ -223,7 +217,6 @@
         <button onclick="openAddUnitModal()" class="btn-primary-action">
           <i data-lucide="plus-circle" style="width:14px; height:14px; color:var(--accent-blue);"></i> Unit
         </button>
-        <!-- Mobile Menu Trigger -->
         <button onclick="toggleMobileDrawer()" class="mobile-menu-btn">
           <i data-lucide="menu" style="width:20px; height:20px;"></i>
         </button>
@@ -231,17 +224,16 @@
     </div>
   </header>
 
-  <!-- MOBILE BOTTOM/DRAWER MENU -->
   <div id="mobileDrawer" class="mobile-drawer" onclick="toggleMobileDrawer()">
     <div class="mobile-drawer-content" onclick="event.stopPropagation()">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
         <span style="font-size:12px; font-weight:bold; color:var(--text-muted);">MENU NAVIGASI</span>
         <button onclick="toggleMobileDrawer()" style="background:none; border:none; color:#fff; padding:4px;"><i data-lucide="x" style="width:18px; height:18px;"></i></button>
       </div>
-      <button id="mob-nav-checksheet" onclick="switchTabMobile('checksheet')"><i data-lucide="clipboard-check" style="width:16px; height:16px; color:var(--accent-blue);"></i> Checksheet & Input</button>
-      <button id="mob-nav-rekap" onclick="switchTabMobile('rekap')"><i data-lucide="bar-chart-3" style="width:16px; height:16px; color:var(--accent-emerald);"></i> Riwayat & Rekapitulasi</button>
-      <button id="mob-nav-yokogawa" onclick="switchTabMobile('yokogawa')"><i data-lucide="gauge" style="width:16px; height:16px; color:var(--accent-cyan);"></i> Monitoring Yokogawa FX1000</button>
-      <button id="mob-nav-settings" onclick="switchTabMobile('settings')"><i data-lucide="cloud" style="width:16px; height:16px; color:var(--accent-amber);"></i> Cloud Sync Google Sheet</button>
+      <button onclick="switchTabMobile('checksheet')"><i data-lucide="clipboard-check" style="width:16px; height:16px; color:var(--accent-blue);"></i> Checksheet & Input</button>
+      <button onclick="switchTabMobile('rekap')"><i data-lucide="bar-chart-3" style="width:16px; height:16px; color:var(--accent-emerald);"></i> Riwayat & Rekapitulasi</button>
+      <button onclick="switchTabMobile('yokogawa')"><i data-lucide="gauge" style="width:16px; height:16px; color:var(--accent-cyan);"></i> Monitoring Yokogawa FX1000</button>
+      <button onclick="switchTabMobile('settings')"><i data-lucide="cloud" style="width:16px; height:16px; color:var(--accent-amber);"></i> Cloud Sync Google Sheet</button>
     </div>
   </div>
 
@@ -449,17 +441,17 @@
         <div class="boiler-card">
           <div class="boiler-header">
             <h3><i data-lucide="flame" style="width:14px; height:14px; color:var(--accent-amber);"></i> Boiler 3</h3>
-            <span class="ip-tag">10.6.125.123</span>
+            <span class="ip-tag">10.6.125.124</span>
           </div>
-          <iframe id="boiler3" src="http://10.6.125.123" title="FX1000 Boiler 3"></iframe>
+          <iframe id="boiler3" src="http://10.6.125.124" title="FX1000 Boiler 3"></iframe>
         </div>
 
         <div class="boiler-card">
           <div class="boiler-header">
             <h3><i data-lucide="shield-check" style="width:14px; height:14px; color:var(--accent-cyan);"></i> Sterilizer</h3>
-            <span class="ip-tag">10.6.125.124</span>
+            <span class="ip-tag">10.6.125.53</span>
           </div>
-          <iframe id="sterilizer" src="http://10.6.125.124" title="Sterilizer"></iframe>
+          <iframe id="sterilizer" src="http://10.6.125.53" title="Sterilizer"></iframe>
         </div>
       </div>
     </div>
@@ -485,11 +477,6 @@
             <input type="url" id="cloudScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
           </div>
 
-          <div>
-            <label>Link Google Spreadsheet Utama *</label>
-            <input type="url" id="googleSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
-          </div>
-
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:5px;">
             <button onclick="saveCloudSettings()" class="btn-submit" style="width:auto; flex:1;"><i data-lucide="save" style="width:14px; height:14px;"></i> Simpan</button>
             <button onclick="testCloudConnection()" class="btn-primary-action" style="background:#334155;"><i data-lucide="wifi" style="width:14px; height:14px; color:var(--accent-emerald);"></i> Uji</button>
@@ -501,6 +488,25 @@
 
   </main>
 
+  <!-- MODAL: EDIT CUSTOM LINK QR PER UNIT -->
+  <div id="editUnitLinkModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="card-header" style="margin-bottom:12px;">
+        <h3 id="editLinkModalTitle" style="font-size:13px;">Atur Link Google Sheet Unit</h3>
+        <button onclick="closeEditLinkModal()" style="background:none; border:none; color:#fff; cursor:pointer;"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
+      </div>
+      <form id="editLinkForm" onsubmit="handleEditLinkSubmit(event)" style="display:flex; flex-direction:column; gap:10px;">
+        <input type="hidden" id="editUnitTargetId">
+        <div>
+          <label>Link Google Spreadsheet / Tab Khusus Unit *</label>
+          <input type="url" id="unitCustomLinkInput" required placeholder="https://docs.google.com/spreadsheets/d/.../edit#gid=...">
+          <p style="font-size:10px; color:var(--text-muted); margin-top:3px;">Link ini akan otomatis tersimpan khusus untuk unit ini dan diubah menjadi QR Code.</p>
+        </div>
+        <button type="submit" class="btn-submit" style="margin-top:5px;">Simpan Link Unit</button>
+      </form>
+    </div>
+  </div>
+
   <!-- MODAL: BARCODE -->
   <div id="unitBarcodeModal" class="modal-backdrop">
     <div class="modal-box" style="text-align: center;">
@@ -509,7 +515,7 @@
         <button onclick="closeBarcodeModal()" style="background:none; border:none; color:#fff; cursor:pointer;"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
       </div>
       
-      <p style="font-size:11px; color:var(--text-muted);">Scan QR Barcode untuk membuka riwayat unit di Google Spreadsheet:</p>
+      <p style="font-size:11px; color:var(--text-muted);">Scan QR Barcode untuk membuka link spreadsheet unit ini:</p>
       
       <div class="qr-container">
         <div id="qrcode"></div>
@@ -570,14 +576,14 @@
 
   <script>
     const DEFAULT_UNITS = [
-      { id: 'PUMP-01', name: 'Main Water Pump A', location: 'Utility Area', maxTemp: 70, maxVib: 4.5 },
-      { id: 'COMP-02', name: 'Air Compressor B', location: 'Production Line 1', maxTemp: 80, maxVib: 5.0 },
-      { id: 'GEN-01', name: 'Genset Standby 500kVA', location: 'Power House', maxTemp: 85, maxVib: 6.0 }
+      { id: 'PUMP-01', name: 'Main Water Pump A', location: 'Utility Area', maxTemp: 70, maxVib: 4.5, sheetLink: 'https://docs.google.com/spreadsheets' },
+      { id: 'COMP-02', name: 'Air Compressor B', location: 'Production Line 1', maxTemp: 80, maxVib: 5.0, sheetLink: 'https://docs.google.com/spreadsheets' },
+      { id: 'GEN-01', name: 'Genset Standby 500kVA', location: 'Power House', maxTemp: 85, maxVib: 6.0, sheetLink: 'https://docs.google.com/spreadsheets' }
     ];
 
     let units = JSON.parse(localStorage.getItem('indusense_units')) || DEFAULT_UNITS;
     let historyLogs = JSON.parse(localStorage.getItem('indusense_history')) || [];
-    let cloudSettings = JSON.parse(localStorage.getItem('indusense_cloud')) || { enabled: false, scriptUrl: '', sheetUrl: '' };
+    let cloudSettings = JSON.parse(localStorage.getItem('indusense_cloud')) || { enabled: false, scriptUrl: '' };
 
     let currentPhotoBase64 = null;
     let chartInstance = null;
@@ -721,9 +727,38 @@
       alert('✅ Checksheet berhasil disimpan!');
     }
 
-    function showUnitBarcodeModal(unitId, unitName) {
-      const baseUrl = cloudSettings.sheetUrl || 'https://docs.google.com/spreadsheets';
-      const finalUrl = `${baseUrl}#gid=0&fvid=${unitId}`;
+    /* CUSTOM UNIT LINK & QR CODE LOGIC */
+    function openEditLinkModal(unitId) {
+      const unit = units.find(u => u.id === unitId);
+      if(!unit) return;
+      document.getElementById('editUnitTargetId').value = unit.id;
+      document.getElementById('editLinkModalTitle').innerText = `Atur Link QR: ${unit.id}`;
+      document.getElementById('unitCustomLinkInput').value = unit.sheetLink || '';
+      document.getElementById('editUnitLinkModal').classList.add('active');
+    }
+
+    function closeEditLinkModal() {
+      document.getElementById('editUnitLinkModal').classList.remove('active');
+    }
+
+    function handleEditLinkSubmit(e) {
+      e.preventDefault();
+      const targetId = document.getElementById('editUnitTargetId').value;
+      const newLink = document.getElementById('unitCustomLinkInput').value.trim();
+
+      const unit = units.find(u => u.id === targetId);
+      if (unit) {
+        unit.sheetLink = newLink;
+        saveLocalData();
+        renderUnitList();
+        closeEditLinkModal();
+        alert(`✅ Link khusus untuk unit ${targetId} berhasil disimpan otomatis!`);
+      }
+    }
+
+    function showUnitBarcodeModal(unitId) {
+      const unit = units.find(u => u.id === unitId);
+      const finalUrl = (unit && unit.sheetLink) ? unit.sheetLink : 'https://docs.google.com/spreadsheets';
 
       document.getElementById('barcodeModalTitle').innerText = `QR Barcode: ${unitId}`;
       document.getElementById('barcodeDirectUrl').value = finalUrl;
@@ -762,8 +797,9 @@
             <div style="font-size:10px; color:var(--text-muted);">${u.location} | Max: ${u.maxTemp}°C</div>
           </div>
           <div class="unit-actions">
-            <button onclick="showUnitBarcodeModal('${u.id}', '${u.name}')" class="btn-qr"><i data-lucide="qr-code" style="width:12px; height:12px;"></i> QR</button>
-            <button onclick="deleteUnit('${u.id}')" style="background:none; border:none; color:var(--accent-rose); cursor:pointer;"><i data-lucide="trash-2" style="width:14px; height:14px;"></i></button>
+            <button onclick="openEditLinkModal('${u.id}')" class="btn-edit-link" title="Atur Link QR"><i data-lucide="link" style="width:12px; height:12px;"></i> Link</button>
+            <button onclick="showUnitBarcodeModal('${u.id}')" class="btn-qr" title="Lihat QR Code"><i data-lucide="qr-code" style="width:12px; height:12px;"></i> QR</button>
+            <button onclick="deleteUnit('${u.id}')" style="background:none; border:none; color:var(--accent-rose); cursor:pointer;" title="Hapus Unit"><i data-lucide="trash-2" style="width:14px; height:14px;"></i></button>
           </div>
         </div>
       `).join('');
@@ -780,7 +816,8 @@
         name: document.getElementById('newUnitName').value.trim(),
         location: document.getElementById('newUnitLocation').value.trim() || 'General Area',
         maxTemp: parseFloat(document.getElementById('newMaxTemp').value),
-        maxVib: parseFloat(document.getElementById('newMaxVib').value)
+        maxVib: parseFloat(document.getElementById('newMaxVib').value),
+        sheetLink: 'https://docs.google.com/spreadsheets'
       };
       if(units.some(u => u.id === newUnit.id)) { alert('⚠️ ID Unit sudah terdaftar!'); return; }
       units.push(newUnit);
@@ -913,7 +950,6 @@
     function initCloudSettingsUI() {
       document.getElementById('syncEnableToggle').checked = cloudSettings.enabled;
       document.getElementById('cloudScriptUrl').value = cloudSettings.scriptUrl || '';
-      document.getElementById('googleSheetUrl').value = cloudSettings.sheetUrl || '';
       updateSyncStatusBadge();
     }
 
@@ -925,7 +961,6 @@
     function saveCloudSettings() {
       cloudSettings.enabled = document.getElementById('syncEnableToggle').checked;
       cloudSettings.scriptUrl = document.getElementById('cloudScriptUrl').value.trim();
-      cloudSettings.sheetUrl = document.getElementById('googleSheetUrl').value.trim();
       localStorage.setItem('indusense_cloud', JSON.stringify(cloudSettings));
       updateSyncStatusBadge();
       alert('💾 Konfigurasi Cloud disimpan.');
